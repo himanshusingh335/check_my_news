@@ -52,7 +52,7 @@ class _TrendingHomeScreenState extends State<TrendingHomeScreen> {
                 children: <Widget>[
                   Expanded(
                     child: ListView.separated(
-                      itemCount: 22,
+                      itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           leading: Image.network(

@@ -5,7 +5,12 @@ import 'package:http/http.dart' as http;
 
 Future<News> fetchNews() async {
   final response = await http.get(
-    Uri.parse('https://bing-news-search1.p.rapidapi.com/news/trendingtopics'),
+    Uri.https('bing-news-search1.p.rapidapi.com', '/news/trendingtopics', {
+      "count": "10",
+      "safeSearch": "Strict",
+      "textFormat": "Raw",
+      "mkt": "en-in"
+    }),
     headers: <String, String>{
       "x-msedge-clientip": "103.208.69.28",
       "x-bingapis-sdk": "true",
