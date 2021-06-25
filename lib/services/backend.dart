@@ -1,9 +1,12 @@
 import 'dart:convert';
 
-import 'package:check_my_news/model/newsClass.dart';
+import 'package:check_my_news/services/persist.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:check_my_news/model/newsClass.dart';
+
 Future<News> fetchNews() async {
+  String clientID = await getClientID();
   final response = await http.get(
     Uri.parse('https://bing-news-search1.p.rapidapi.com/news/trendingtopics'),
     headers: <String, String>{
@@ -12,7 +15,7 @@ Future<News> fetchNews() async {
       "x-rapidapi-key": "091d3ca15fmshf687b8d71d5b41ep15a8d9jsn26fd0bb2a445",
       "x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
       "useQueryString": "true",
-      "x-msedge-clientid": "050FB0532E7B62B00A75A0332FB36325",
+      "x-msedge-clientid": clientID,
     },
   );
   if (response.statusCode == 200) {
@@ -23,6 +26,6 @@ Future<News> fetchNews() async {
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
-    throw Exception('Failed to load album');
+    throw Exception('Failed to load Trending news');
   }
 }
