@@ -1,3 +1,4 @@
+import 'package:check_my_news/components/searcBar.dart';
 import 'package:check_my_news/screens/businessTab.dart';
 import 'package:check_my_news/screens/entertainmentTab.dart';
 import 'package:check_my_news/screens/indiaTab.dart';
@@ -20,12 +21,22 @@ class HomeScreen extends StatelessWidget {
       length: 9,
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: CustomSearchDelegate(),
+                );
+              },
+            ),
+          ],
           centerTitle: true,
           title: Text(this.title),
           bottom: TabBar(
             isScrollable: true,
             tabs: <Tab>[
-              new Tab(text: 'Trending'),
               new Tab(text: 'India'),
               new Tab(text: 'Politics'),
               new Tab(text: 'Science & Tech'),
@@ -34,6 +45,7 @@ class HomeScreen extends StatelessWidget {
               new Tab(text: 'Entertainment'),
               new Tab(text: 'Lifestyle'),
               new Tab(text: 'World'),
+              new Tab(text: 'Trending'),
             ],
           ),
         ),
@@ -57,7 +69,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         body: TabBarView(children: <Widget>[
-          Trending(),
           India(),
           Politics(),
           Science(),
@@ -66,6 +77,7 @@ class HomeScreen extends StatelessWidget {
           Entertainment(),
           LifeStyle(),
           World(),
+          Trending(),
         ]),
       ),
     );
