@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
+
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:check_my_news/model/newsClass.dart';
 import 'package:check_my_news/services/backend.dart';
-import 'package:flutter/material.dart';
 
 class Trending extends StatefulWidget {
   const Trending({Key? key}) : super(key: key);
@@ -27,12 +30,24 @@ class _TrendingState extends State<Trending> {
             children: <Widget>[
               Expanded(
                 child: ListView.separated(
-                  itemCount: 10,
+                  itemCount: 12,
                   itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      leading: Image.network(
-                          snapshot.data!.value[index]['image']['url']),
-                      title: Text(snapshot.data!.value[index]['name']),
+                    return Card(
+                      child: ListTile(
+                        leading: Image.network(
+                          snapshot.data!.value[index]['image']['thumbnail']
+                              ['contentUrl'],
+                        ),
+                        title: Text(snapshot.data!.value[index]['name']),
+                        subtitle:
+                            Text(snapshot.data!.value[index]['description']),
+                        onTap: () async {
+                          String _url = snapshot.data!.value[index]['url'];
+                          await canLaunch(_url)
+                              ? await launch(_url, forceWebView: true)
+                              : throw 'Could not launch $_url';
+                        },
+                      ),
                     );
                   },
                   separatorBuilder: (context, index) {
