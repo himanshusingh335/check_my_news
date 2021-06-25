@@ -9,5 +9,6 @@ Future<String> getClientID() async {
   var prefs = await SharedPreferences.getInstance();
   String clientID;
   clientID = (prefs.getString('clientID') ?? "");
+
   return clientID;
 }
