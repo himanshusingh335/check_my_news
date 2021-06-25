@@ -1,20 +1,21 @@
+import 'package:flutter/material.dart';
 import 'package:check_my_news/model/newsClass.dart';
 import 'package:check_my_news/services/backend.dart';
-import 'package:flutter/material.dart';
 
-class Trending extends StatefulWidget {
-  const Trending({Key? key}) : super(key: key);
+class Sports extends StatefulWidget {
+  const Sports({Key? key}) : super(key: key);
+
   @override
-  _TrendingState createState() => _TrendingState();
+  _SportsState createState() => _SportsState();
 }
 
-class _TrendingState extends State<Trending> {
+class _SportsState extends State<Sports> {
   late Future<News> futureNews;
 
   @override
   void initState() {
     super.initState();
-    futureNews = fetchTrendingNews();
+    futureNews = fetchCategoryNews("Sports");
   }
 
   @override
@@ -27,12 +28,15 @@ class _TrendingState extends State<Trending> {
             children: <Widget>[
               Expanded(
                 child: ListView.separated(
-                  itemCount: 10,
+                  itemCount: 12,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
-                      leading: Image.network(
-                          snapshot.data!.value[index]['image']['url']),
+                      leading: Image.network(snapshot.data!.value[index]
+                          ['image']['thumbnail']['contentUrl']),
                       title: Text(snapshot.data!.value[index]['name']),
+                      subtitle:
+                          Text(snapshot.data!.value[index]['description']),
+                      isThreeLine: true,
                     );
                   },
                   separatorBuilder: (context, index) {

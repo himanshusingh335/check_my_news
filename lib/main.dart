@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:check_my_news/screens/trending.dart';
+import 'package:check_my_news/screens/homeScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
-      home: TrendingHomeScreen(title: 'Check My News'),
+      home: HomeScreen(title: 'Check My News'),
     );
   }
 }
