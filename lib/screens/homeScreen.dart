@@ -47,25 +47,6 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: FlutterLogo(
-                  size: 5,
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
-                //onTap: () {
-                //Navigator.pushNamed(context, '/settings');
-                //},
-              ),
-            ],
-          ),
-        ),
         body: TabBarView(children: <Widget>[
           India(),
           Politics(),

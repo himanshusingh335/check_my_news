@@ -44,7 +44,10 @@ class _PoliticsState extends State<Politics> {
                                   snapshot.data!.value[index]['image']
                                       ['thumbnail']['contentUrl'],
                                 )
-                              : FlutterLogo(),
+                              : Image.asset(
+                                  'assets/n.png',
+                                  height: 120,
+                                ),
                           title: Text(snapshot.data!.value[index]['name']),
                           subtitle:
                               Text(snapshot.data!.value[index]['description']),
