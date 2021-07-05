@@ -13,47 +13,54 @@ class Science extends StatefulWidget {
 }
 
 class _ScienceState extends State<Science> {
-  late Future<News> futureNews;
-
   @override
   void initState() {
     super.initState();
-    futureNews = fetchCategoryNews("ScienceAndTechnology");
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<News>(
-      future: futureNews,
+      future: fetchCategoryNews("ScienceAndTechnology"),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Column(
             children: <Widget>[
               Expanded(
-                child: ListView.separated(
-                  itemCount: 12,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      child: ListTile(
-                        leading: Image.network(
-                          snapshot.data!.value[index]['image']['thumbnail']
-                              ['contentUrl'],
-                        ),
-                        title: Text(snapshot.data!.value[index]['name']),
-                        subtitle:
-                            Text(snapshot.data!.value[index]['description']),
-                        onTap: () async {
-                          String _url = snapshot.data!.value[index]['url'];
-                          await canLaunch(_url)
-                              ? await launch(_url, forceWebView: true)
-                              : throw 'Could not launch $_url';
-                        },
-                      ),
+                child: RefreshIndicator(
+                  onRefresh: () {
+                    setState(() {});
+                    return Future.delayed(
+                      const Duration(milliseconds: 500),
                     );
                   },
-                  separatorBuilder: (context, index) {
-                    return Divider();
-                  },
+                  child: ListView.separated(
+                    itemCount: 12,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        child: ListTile(
+                          leading: snapshot.data!.value[index]['image'] != null
+                              ? Image.network(
+                                  snapshot.data!.value[index]['image']
+                                      ['thumbnail']['contentUrl'],
+                                )
+                              : FlutterLogo(),
+                          title: Text(snapshot.data!.value[index]['name']),
+                          subtitle:
+                              Text(snapshot.data!.value[index]['description']),
+                          onTap: () async {
+                            String _url = snapshot.data!.value[index]['url'];
+                            await canLaunch(_url)
+                                ? await launch(_url, forceWebView: true)
+                                : throw 'Could not launch $_url';
+                          },
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return Divider();
+                    },
+                  ),
                 ),
               ),
             ],

@@ -6,7 +6,6 @@ import 'package:check_my_news/screens/lifestyleTab.dart';
 import 'package:check_my_news/screens/politicsTab.dart';
 import 'package:check_my_news/screens/scienceTab.dart';
 import 'package:check_my_news/screens/sportsTab.dart';
-import 'package:check_my_news/screens/trending.dart';
 import 'package:check_my_news/screens/worldTab.dart';
 
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 9,
+      length: 8,
       child: Scaffold(
         appBar: AppBar(
           actions: [
@@ -45,7 +44,6 @@ class HomeScreen extends StatelessWidget {
               new Tab(text: 'Entertainment'),
               new Tab(text: 'Lifestyle'),
               new Tab(text: 'World'),
-              new Tab(text: 'Trending'),
             ],
           ),
         ),
@@ -77,7 +75,6 @@ class HomeScreen extends StatelessWidget {
           Entertainment(),
           LifeStyle(),
           World(),
-          Trending(),
         ]),
       ),
     );

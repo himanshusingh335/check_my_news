@@ -39,8 +39,12 @@ class CustomSearchDelegate extends SearchDelegate {
                   itemCount: 10,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
-                      leading: Image.network(snapshot.data!.value[index]
-                          ['image']['thumbnail']['contentUrl']),
+                      leading: snapshot.data!.value[index]['image'] != null
+                          ? Image.network(
+                              snapshot.data!.value[index]['image']['thumbnail']
+                                  ['contentUrl'],
+                            )
+                          : FlutterLogo(),
                       title: Text(snapshot.data!.value[index]['name']),
                       subtitle:
                           Text(snapshot.data!.value[index]['description']),
@@ -65,6 +69,12 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return Center(child: Text("Search News"));
+    return Center(
+      child: Icon(
+        Icons.search,
+        size: 100,
+        color: Colors.blue,
+      ),
+    );
   }
 }
