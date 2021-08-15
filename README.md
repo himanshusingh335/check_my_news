@@ -42,3 +42,6 @@ flutter run --release
 # Summary
 
 An interactive news app that curates news for you based on your interests
+
+![Screenshot_1629022159](https://user-images.githubusercontent.com/61236944/129474939-9e5cb1c8-432e-4b8a-81a8-df711e49e57e.png)
+
