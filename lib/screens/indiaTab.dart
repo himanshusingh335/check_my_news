@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:check_my_news/model/newsClass.dart';
-import 'package:check_my_news/services/backend.dart';
+import 'package:check_my_news/services/news/newsServices.dart';
 
 class India extends StatefulWidget {
   const India({Key? key}) : super(key: key);
@@ -13,15 +13,12 @@ class India extends StatefulWidget {
 }
 
 class _IndiaState extends State<India> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  
+  final newsServices = NewsServices();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<News>(
-      future: fetchCategoryNews("India"),
+      future: newsServices.fetchCategoryNews("India"),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Column(

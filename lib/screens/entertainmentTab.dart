@@ -1,9 +1,8 @@
+import 'package:check_my_news/injector.dart';
 import 'package:flutter/material.dart';
-
 import 'package:url_launcher/url_launcher.dart';
-
 import 'package:check_my_news/model/newsClass.dart';
-import 'package:check_my_news/services/backend.dart';
+import 'package:check_my_news/services/news/newsServices.dart';
 
 class Entertainment extends StatefulWidget {
   const Entertainment({Key? key}) : super(key: key);
@@ -13,18 +12,12 @@ class Entertainment extends StatefulWidget {
 }
 
 class _EntertainmentState extends State<Entertainment> {
-  late Future<News> futureNews;
 
-  @override
-  void initState() {
-    super.initState();
-    futureNews = fetchCategoryNews("Entertainment");
-  }
-
+  final newsServices = injector<NewsServices>();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<News>(
-      future: futureNews,
+      future: newsServices.fetchCategoryNews("Entertainment"),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Column(
