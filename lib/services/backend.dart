@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:check_my_news/constants/enum_constants.dart';
 import 'package:dart_ipify/dart_ipify.dart';
 
 import 'package:check_my_news/services/persist.dart';
@@ -43,16 +44,29 @@ Future<News> fetchTrendingNews() async {
   }
 }
 
-Future<News> fetchCategoryNews(String category) async {
+Map<NewsCategory, String> _categoryToStringMap = {
+  NewsCategory.Trending: "",
+  NewsCategory.India: "India",
+  NewsCategory.Business: "Business",
+  NewsCategory.Entertainment: "Entertainment",
+  NewsCategory.Lifestyle: "Lifestyle",
+  NewsCategory.Politics: "Politics",
+  NewsCategory.ScienceANdTech: "ScienceAndTechnology",
+  NewsCategory.Sports: "Sports",
+  NewsCategory.World: "World",
+};
+
+Future<News> fetchCategoryNews(NewsCategory category) async {
   String clientID = await getClientID();
   String clientIP = await Ipify.ipv64();
+  final categoryString = _categoryToStringMap[category]!;
 
   final response = await http.get(
     Uri.https('bing-news-search1.p.rapidapi.com', '/news', {
       "textFormat": "Raw",
       "safeSearch": "Strict",
       "mkt": "en-in",
-      "category": category
+      "category": categoryString
     }),
     headers: <String, String>{
       "x-msedge-clientip": clientIP,
