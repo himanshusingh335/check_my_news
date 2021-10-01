@@ -1,9 +1,11 @@
+import 'package:check_my_news/injector.dart';
 import 'package:flutter/material.dart';
 
 import 'package:check_my_news/model/newsClass.dart';
-import 'package:check_my_news/services/backend.dart';
+import 'package:check_my_news/services/news/newsServices.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
+  final newsServices = injector<NewsServices>();
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -29,7 +31,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     return FutureBuilder<News>(
-      future: fetchSearchedNews(query),
+      future: newsServices.fetchSearchedNews(query),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Column(

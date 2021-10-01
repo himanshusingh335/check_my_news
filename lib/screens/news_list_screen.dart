@@ -1,9 +1,11 @@
+
 import 'package:check_my_news/components/news_card.dart';
 import 'package:check_my_news/constants/enum_constants.dart';
+import 'package:check_my_news/injector.dart';
+import 'package:check_my_news/services/news/newsServices.dart';
 import 'package:flutter/material.dart';
 
 import 'package:check_my_news/model/newsClass.dart';
-import 'package:check_my_news/services/backend.dart';
 
 class NewsListScreen extends StatefulWidget {
   const NewsListScreen({Key? key, required this.category}) : super(key: key);
@@ -14,18 +16,11 @@ class NewsListScreen extends StatefulWidget {
 }
 
 class _NewsListScreenState extends State<NewsListScreen> {
-  late final Future<News> _future;
-
-  @override
-  void initState() {
-    super.initState();
-    _future = fetchCategoryNews(widget.category);
-  }
-
+  final newsServices = injector<NewsServices>();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<News>(
-      future: _future,
+      future: newsServices.fetchCategoryNews(categoryToStringMap[widget.category]!),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           News news = snapshot.data as News;
@@ -35,7 +30,7 @@ class _NewsListScreenState extends State<NewsListScreen> {
               Expanded(
                 child: RefreshIndicator(
                   onRefresh: () async {
-                    await fetchCategoryNews(widget.category);
+                    await newsServices.fetchCategoryNews(categoryToStringMap[widget.category]!);
                   },
                   child: ListView.separated(
                     itemCount: 12,
