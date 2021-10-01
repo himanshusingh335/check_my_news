@@ -1,12 +1,6 @@
 import 'package:check_my_news/components/searcBar.dart';
-import 'package:check_my_news/screens/businessTab.dart';
-import 'package:check_my_news/screens/entertainmentTab.dart';
-import 'package:check_my_news/screens/indiaTab.dart';
-import 'package:check_my_news/screens/lifestyleTab.dart';
-import 'package:check_my_news/screens/politicsTab.dart';
-import 'package:check_my_news/screens/scienceTab.dart';
-import 'package:check_my_news/screens/sportsTab.dart';
-import 'package:check_my_news/screens/worldTab.dart';
+import 'package:check_my_news/constants/enum_constants.dart';
+import 'package:check_my_news/screens/news_list_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -36,26 +30,26 @@ class HomeScreen extends StatelessWidget {
           bottom: TabBar(
             isScrollable: true,
             tabs: <Tab>[
-              new Tab(text: 'India'),
-              new Tab(text: 'Politics'),
-              new Tab(text: 'Science & Tech'),
-              new Tab(text: 'Sports'),
-              new Tab(text: 'Business'),
-              new Tab(text: 'Entertainment'),
-              new Tab(text: 'Lifestyle'),
-              new Tab(text: 'World'),
+              Tab(text: 'India'),
+              Tab(text: 'Politics'),
+              Tab(text: 'Science & Tech'),
+              Tab(text: 'Sports'),
+              Tab(text: 'Business'),
+              Tab(text: 'Entertainment'),
+              Tab(text: 'Lifestyle'),
+              Tab(text: 'World'),
             ],
           ),
         ),
         body: TabBarView(children: <Widget>[
-          India(),
-          Politics(),
-          Science(),
-          Sports(),
-          Business(),
-          Entertainment(),
-          LifeStyle(),
-          World(),
+          NewsListScreen(category: NewsCategory.India),
+          NewsListScreen(category: NewsCategory.Politics),
+          NewsListScreen(category: NewsCategory.ScienceANdTech),
+          NewsListScreen(category: NewsCategory.Sports),
+          NewsListScreen(category: NewsCategory.Business),
+          NewsListScreen(category: NewsCategory.Entertainment),
+          NewsListScreen(category: NewsCategory.Lifestyle),
+          NewsListScreen(category: NewsCategory.World),
         ]),
       ),
     );
