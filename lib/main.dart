@@ -1,7 +1,7 @@
 import 'package:check_my_news/injector.dart';
 import 'package:flutter/material.dart';
 
-import 'package:check_my_news/screens/homeScreen.dart';
+import 'package:check_my_news/screens/splash_screen.dart';
 
 void main() {
   /// Register dependency injections
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
-      home: HomeScreen(title: 'Check My News'),
+      home: SplashScreen(),
     );
   }
 }
