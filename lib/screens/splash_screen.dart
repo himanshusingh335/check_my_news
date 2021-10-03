@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:check_my_news/constants/theme.dart';
+import 'package:check_my_news/screens/homeScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
