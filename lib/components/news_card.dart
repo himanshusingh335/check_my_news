@@ -14,6 +14,7 @@ class NewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0,
       child: ListTile(
         leading: cardNews['image'] != null
             ? Image.network(
